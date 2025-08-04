@@ -1,5 +1,6 @@
 # 构建阶段
-FROM node:20-alpine AS builder
+# FROM node:20-alpine AS builder
+FROM registry.cn-hangzhou.aliyuncs.com/lusyoe/node:20-alpine AS builder
 
 WORKDIR /app
 
@@ -16,7 +17,8 @@ COPY . .
 RUN npm run build
 
 # 生产阶段 - 使用 Nginx
-FROM nginx:alpine
+# FROM nginx:alpine
+FROM registry.cn-hangzhou.aliyuncs.com/lusyoe/nginx:alpine
 
 # 复制构建的静态文件到Nginx目录
 COPY --from=builder /app/out /usr/share/nginx/html
